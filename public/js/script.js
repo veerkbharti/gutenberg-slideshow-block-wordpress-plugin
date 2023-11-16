@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const sliderContainer = document.querySelector(".slide-container");
   const slider = document.querySelector(".slider");
   const firstSlideWidth = slider.querySelector(".slide").offsetWidth;
   const allSlides = [...document.querySelectorAll(".slide")];
 
   let isDragging = false,
     startX,
-    startScrollLeft;
+    startScrollLeft,
+    isAutoPlay = true,
+    timeoutId;
 
   let slidePerView = Math.round(slider.offsetWidth / firstSlideWidth);
 
@@ -70,7 +73,16 @@ document.addEventListener("DOMContentLoaded", function () {
       slider.scrollLeft = slider.offsetWidth;
       slider.classList.remove("no-transition");
     }
+
+    clearTimeout(timeoutId);
+    if (!sliderContainer.matches(":hover")) autoPlay();
   };
+
+  const autoPlay = () => {
+    if (window.innerWidth < 800 || !isAutoPlay) return;
+    timeoutId = setTimeout(() => (slider.scrollLeft += firstSlideWidth), 2500);
+  };
+  autoPlay();
 
   document.querySelector("#prev-button").addEventListener("click", slidePrev);
   document.querySelector("#next-button").addEventListener("click", slideNext);
@@ -82,4 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("mouseup", dragStop);
 
   slider.addEventListener("scroll", infiniteScroll);
+
+  sliderContainer.addEventListener("mouseenter", () => clearTimeout(timeoutId));
+  sliderContainer.addEventListener("mouseleave", autoPlay);
 });
