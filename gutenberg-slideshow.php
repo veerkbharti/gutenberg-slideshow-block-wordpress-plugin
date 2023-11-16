@@ -11,7 +11,7 @@ function gutenberg_slideshow_script()
     $asset_file = include(plugin_dir_path(__FILE__) . 'build/index.asset.php');
 
     wp_enqueue_script(
-        'example-editor-scripts',
+        'slideshow-editor-scripts',
         plugins_url('build/index.js', __FILE__),
         array('wp-blocks'),
         $asset_file['dependencies'],
@@ -20,3 +20,12 @@ function gutenberg_slideshow_script()
 }
 add_action('enqueue_block_editor_assets', 'gutenberg_slideshow_script');
 
+
+function gutenberg_slideshow_frontend_styles()
+{
+    wp_enqueue_style(
+        'slideshow-frontend-styles',
+        plugins_url('css/style.css', __FILE__),
+    );
+}
+add_action('wp_enqueue_scripts', 'gutenberg_slideshow_frontend_styles');

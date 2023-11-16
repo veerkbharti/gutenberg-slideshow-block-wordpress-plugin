@@ -35,24 +35,7 @@ registerBlockType("gutenberg-slideshow-block/slideshow", {
 
     return (
       <div>
-        <div className="slideshow">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <div>
-              {posts.map((post) => (
-                <div key={post.id} className="slide">
-                  <img
-                    src={post.jetpack_featured_media_url}
-                    alt={post.title.rendered}
-                  />
-                  <h2>{post.title.rendered}</h2>
-                  <p>{post.date}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <h1>Gutenberg Slidershow</h1>
       </div>
     );
   },
@@ -61,17 +44,37 @@ registerBlockType("gutenberg-slideshow-block/slideshow", {
     const { posts } = attributes;
 
     return (
-      <div>
-        {posts.map((post) => (
-          <div key={post.id} className="slide">
-            <img
-              src={post.jetpack_featured_media_url}
-              alt={post.title.rendered}
-            />
-            <h2>{post.title.rendered}</h2>
-            <p>{post.date}</p>
-          </div>
-        ))}
+      <div
+        className="slide-container"
+        style={{ margin: "0!important", maxWidth: "none" }}
+      >
+        <ul className="slider">
+          {posts.map((post, index) => (
+            <li key={post.id} className="slide">
+              <a href={post.link}>
+                <img
+                  className="post-thumb"
+                  src={post.jetpack_featured_media_url}
+                  alt={post.title.rendered}
+                />
+              </a>
+              <div className="post-content">
+                <a href={post.link}>
+                  <h4 className="post-title">{post.title.rendered}</h4>
+                </a>
+                <p className="post-date">{post.date}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div style={{ display: "flex" }}>
+          <button className="prev-icon">
+            <span class="dashicons dashicons-arrow-left-alt2"></span>
+          </button>
+          <button className="next-icon">
+            <span class="dashicons dashicons-arrow-right-alt2"></span>
+          </button>
+        </div>
       </div>
     );
   },

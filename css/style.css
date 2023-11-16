@@ -1,0 +1,76 @@
+.slide-container {
+  width: 100%;
+  background: gainsboro;
+  padding: 20px 30px;
+  position: relative;
+}
+
+.slider {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% / 3)-12px);
+  align-items: baseline;
+  gap: 16px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.slide a {
+  text-decoration: none;
+}
+
+.slide {
+  width: min-content;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.post-content {
+  padding: 5px;
+}
+
+.post-thumb {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.post-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 21px;
+  font-family: system-ui;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.post-date {
+  margin: 5px 0;
+}
+
+.prev-icon,
+.next-icon {
+  padding: 5px;
+  margin: 0;
+  border: 1px solid #766e6e;
+  background: #fff;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 99;
+  top: 48%;
+}
+
+.prev-icon {
+  left: 40px;
+}
+
+.next-icon {
+  right: 40px;
+}
