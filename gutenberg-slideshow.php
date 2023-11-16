@@ -8,17 +8,15 @@ Author: Veer Kunwer Bharti
 
 function gutenberg_slideshow_script()
 {
-    // Enqueue scripts
-    wp_enqueue_script('gutenberg-slideshow-block', plugins_url('js/block.js', __FILE__), array('wp-blocks'));
+    $asset_file = include(plugin_dir_path(__FILE__) . 'build/index.asset.php');
 
-    register_block_type('gutenberg-slideshow-block/slideshow', array(
-        'editor_script' => 'gutenberg-slideshow-block',
-    ));
+    wp_enqueue_script(
+        'example-editor-scripts',
+        plugins_url('build/index.js', __FILE__),
+        array('wp-blocks'),
+        $asset_file['dependencies'],
+        $asset_file['version']
+    );
 }
-
-add_action('init', 'gutenberg_slideshow_script');
-
-
-
-
+add_action('enqueue_block_editor_assets', 'gutenberg_slideshow_script');
 
