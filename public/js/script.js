@@ -10,6 +10,16 @@ document.addEventListener("DOMContentLoaded", function () {
     slider.scrollLeft -= firstSlideWidth;
   }
 
-  document.getElementById("prev-button").addEventListener("click", slidePrev);
-  document.getElementById("next-button").addEventListener("click", slideNext);
+  const checkKey = (e) => {
+    if (e.keyCode == "37") {
+      slidePrev();
+    } else if (e.keyCode == "39") {
+      slideNext();
+    }
+  };
+
+  document.querySelector("#prev-button").addEventListener("click", slidePrev);
+  document.querySelector("#next-button").addEventListener("click", slideNext);
+
+  document.onkeydown = checkKey;
 });
