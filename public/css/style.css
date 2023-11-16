@@ -12,9 +12,24 @@
   grid-auto-columns: calc((100% / 3)-12px);
   align-items: baseline;
   gap: 16px;
-  overflow: hidden;
   padding: 0;
+  overflow: auto;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider.dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+.slider.dragging .slide {
+  cursor: grab;
+  user-select: none;
 }
 
 .slide a {
@@ -25,6 +40,7 @@
   width: min-content;
   background: #fff;
   border-radius: 8px;
+  scroll-snap-align: start;
 }
 
 .post-content {
