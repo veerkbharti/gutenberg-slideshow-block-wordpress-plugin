@@ -23,6 +23,10 @@
   display: none;
 }
 
+.carousel.no-transition {
+  scroll-behavior: auto;
+}
+
 .slider.dragging {
   scroll-snap-type: none;
   scroll-behavior: auto;
