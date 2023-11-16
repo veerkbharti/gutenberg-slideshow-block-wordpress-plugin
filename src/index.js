@@ -67,14 +67,20 @@ registerBlockType("gutenberg-slideshow-block/slideshow", {
             </li>
           ))}
         </ul>
-        <div style={{ display: "flex" }}>
-          <button className="prev-icon">
-            <span class="dashicons dashicons-arrow-left-alt2"></span>
-          </button>
-          <button className="next-icon">
-            <span class="dashicons dashicons-arrow-right-alt2"></span>
-          </button>
-        </div>
+        <button
+          type="button"
+          id="prev-button"
+          className="prev-icon"
+        >
+          <span className="dashicons dashicons-arrow-left-alt2"></span>
+        </button>
+        <button
+          type="button"
+          id="next-button"
+          className="next-icon"
+        >
+          <span className="dashicons dashicons-arrow-right-alt2"></span>
+        </button>
       </div>
     );
   },

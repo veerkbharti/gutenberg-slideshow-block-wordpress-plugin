@@ -25,7 +25,17 @@ function gutenberg_slideshow_frontend_styles()
 {
     wp_enqueue_style(
         'slideshow-frontend-styles',
-        plugins_url('css/style.css', __FILE__),
+        plugins_url('public/css/style.css', __FILE__),
+        array(),
+        time(),
+    );
+
+    wp_enqueue_script(
+        'slideshow-frontend-scripts',
+        plugins_url('public/js/script.js', __FILE__),
+        array(),
+        time(),
+        true
     );
 }
 add_action('wp_enqueue_scripts', 'gutenberg_slideshow_frontend_styles');

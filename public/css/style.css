@@ -14,6 +14,7 @@
   gap: 16px;
   overflow: hidden;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 .slide a {
@@ -65,6 +66,7 @@
   position: absolute;
   z-index: 99;
   top: 48%;
+  cursor: pointer;
 }
 
 .prev-icon {
