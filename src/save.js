@@ -24,7 +24,12 @@ const save = ({ attributes }) => {
               <a href={post.link}>
                 <h4 className="post-title">{post.title.rendered}</h4>
               </a>
-              <p className="post-date">{post.date}</p>
+              <div className="post-desc">
+                <p
+                  dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                />
+              </div>
+              <label className="post-date">{post.date}</label>
             </div>
           </li>
         ))}

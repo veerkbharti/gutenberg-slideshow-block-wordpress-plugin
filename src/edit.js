@@ -37,7 +37,7 @@ const edit = ({ attributes, setAttributes }) => {
   return (
     <div>
       <InspectorControls>
-        <PanelBody title="Slideshow Settings">
+        <PanelBody title="Slider Settings">
           <TextControl
             label="API URL"
             value={API_URL}
@@ -48,7 +48,7 @@ const edit = ({ attributes, setAttributes }) => {
           </Button>
         </PanelBody>
 
-        <PanelBody title="Slides Settings">
+        <PanelBody title="Slides Settings" initialOpen={false}>
           <div className="toggle-body">
             <div className="toggle-box">
               <FormToggle
@@ -100,7 +100,14 @@ const edit = ({ attributes, setAttributes }) => {
                   <a href={post.link}>
                     <h4 className="post-title">{post.title.rendered}</h4>
                   </a>
-                  <p className="post-date">{post.date}</p>
+                  <div className="post-desc">
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: post.excerpt.rendered,
+                      }}
+                    />
+                  </div>
+                  <label className="post-date">{post.date}</label>
                 </div>
               </li>
             ))}
