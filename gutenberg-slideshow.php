@@ -10,6 +10,14 @@ function gutenberg_slideshow_script()
 {
     $asset_file = include(plugin_dir_path(__FILE__) . 'build/index.asset.php');
 
+    wp_enqueue_style(
+        'slideshow-editor-styles',
+        plugins_url('admin/css/style.css', __FILE__),
+        array(),
+        $asset_file['version'],
+        'all'
+    );
+
     wp_enqueue_script(
         'slideshow-editor-scripts',
         plugins_url('build/index.js', __FILE__),
