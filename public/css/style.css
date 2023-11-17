@@ -9,7 +9,7 @@
   list-style: none;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc((100% / 3)-12px);
+  grid-auto-columns: calc((100% / 3) - 11px);
   align-items: baseline;
   gap: 16px;
   padding: 0;
@@ -37,11 +37,10 @@
 }
 
 .slide a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .slide {
-  width: min-content;
   background: #fff;
   border-radius: 8px;
   scroll-snap-align: start;
@@ -52,8 +51,8 @@
 }
 
 .post-thumb {
-  height: 300px;
-  width: 300px;
+  height: 250px !important;
+  width: 100% !important;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
 }
@@ -61,7 +60,7 @@
 .post-title {
   margin: 0;
   font-weight: 600;
-  font-size: 21px;
+  font-size: 21px !important;
   font-family: system-ui;
   overflow: hidden;
   display: -webkit-box;
@@ -90,9 +89,21 @@
 }
 
 .prev-icon {
-  left: 40px;
+  left: 15px;
 }
 
 .next-icon {
-  right: 40px;
+  right: 15px;
+}
+
+@media screen and (max-width: 900px) {
+  .slider {
+    grid-auto-columns: calc((100% / 2) - 8px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .slider {
+    grid-auto-columns: 100%;
+  }
 }
