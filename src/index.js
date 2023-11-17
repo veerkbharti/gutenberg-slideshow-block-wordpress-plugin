@@ -1,7 +1,8 @@
-const { registerBlockType } = wp.blocks;
-const { InspectorControls, RichText  } = wp.editor;
-const { PanelBody, TextControl, Button } = wp.components;
-const { useState, useEffect } = wp.element;
+import { registerBlockType } from "@wordpress/blocks";
+import { InspectorControls, RichText } from "@wordpress/block-editor";
+import { PanelBody, TextControl, Button } from "@wordpress/components";
+import { useState, useEffect } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
 
 registerBlockType("gutenberg-slideshow-block/slideshow", {
   title: "Custom Slideshow",
