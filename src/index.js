@@ -21,6 +21,16 @@ registerBlockType("gutenberg-slideshow-block/slideshow", {
       type: "string",
       default: "Gutenberg Slideshow",
     },
+
+    autoPlay: {
+      type: "boolean",
+      default: false,
+    },
+
+    infiniteLoop: {
+      type: "boolean",
+      default: true,
+    },
   },
 
   edit,

@@ -1,12 +1,16 @@
 const save = ({ attributes }) => {
-  const { posts } = attributes;
+  const { posts, autoPlay, infiniteLoop } = attributes;
 
   return (
     <div
       className="slide-container"
       style={{ margin: "0!important", maxWidth: "none" }}
     >
-      <ul className="slider">
+      <ul
+        className="slider"
+        data-autoplay={autoPlay}
+        data-infiniteloop={infiniteLoop}
+      >
         {posts.map((post, index) => (
           <li key={post.id} className="slide">
             <a href={post.link}>

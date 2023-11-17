@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let isDragging = false,
     startX,
     startScrollLeft,
-    isAutoPlay = true,
+    isAutoPlay = slider.getAttribute("data-autoplay") === "true" ? true : false,
+    isInfiniteLoop =
+      slider.getAttribute("data-infiniteloop") === "true" ? true : false,
     timeoutId;
 
   let slidePerView = Math.round(slider.offsetWidth / firstSlideWidth);
@@ -61,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const infiniteScroll = () => {
+    if (!isInfiniteLoop) return;
     if (slider.scrollLeft === 0) {
       slider.classList.add("no-transition");
       slider.scrollLeft = slider.scrollWidth - 2 * slider.offsetWidth;

@@ -1,9 +1,14 @@
 import { InspectorControls, RichText } from "@wordpress/block-editor";
-import { PanelBody, TextControl, Button } from "@wordpress/components";
+import {
+  PanelBody,
+  TextControl,
+  Button,
+  FormToggle,
+} from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 
 const edit = ({ attributes, setAttributes }) => {
-  const { API_URL, posts, title } = attributes;
+  const { API_URL, posts, title, autoPlay, infiniteLoop } = attributes;
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -38,7 +43,29 @@ const edit = ({ attributes, setAttributes }) => {
             value={API_URL}
             onChange={(value) => setAttributes({ API_URL: value })}
           />
-          <Button onClick={handleFetch}>Save</Button>
+          <Button variant="primary" onClick={handleFetch}>
+            Save
+          </Button>
+        </PanelBody>
+
+        <PanelBody title="Slides Settings">
+          <div className="toggle-body">
+            <div className="toggle-box">
+              <FormToggle
+                checked={autoPlay}
+                onChange={() => setAttributes({ autoPlay: !autoPlay })}
+              />
+              <label className="label">Auto play</label>
+            </div>
+
+            <div className="toggle-box">
+              <FormToggle
+                checked={infiniteLoop}
+                onChange={() => setAttributes({ infiniteLoop: !infiniteLoop })}
+              />
+              <label className="label">Infinite loop</label>
+            </div>
+          </div>
         </PanelBody>
       </InspectorControls>
 
@@ -90,4 +117,4 @@ const edit = ({ attributes, setAttributes }) => {
   );
 };
 
-export default edit
+export default edit;

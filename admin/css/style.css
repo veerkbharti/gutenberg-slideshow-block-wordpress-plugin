@@ -96,6 +96,22 @@
   right: 15px;
 }
 
+.toggle-body{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toggle-box{
+  display: flex;
+  gap: 16px;
+}
+
+.toggle-box .label{
+  font-size: 14px;
+    font-weight: 500;
+}
+
 @media screen and (max-width: 900px) {
   .slider {
     grid-auto-columns: calc((100% / 2) - 8px);
@@ -107,4 +123,3 @@
     grid-auto-columns: 100%;
   }
 }
-  
