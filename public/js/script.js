@@ -30,11 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
   slider.classList.remove("no-transition");
 
   function slidePrev() {
-    slider.scrollLeft += firstSlideWidth + 16;
+    slider.scrollLeft -= firstSlideWidth + 16;
   }
 
   function slideNext() {
-    slider.scrollLeft -= firstSlideWidth + 16;
+    slider.scrollLeft += firstSlideWidth + 16;
   }
 
   const checkKey = (e) => {
