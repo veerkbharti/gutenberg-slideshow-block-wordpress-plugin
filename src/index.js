@@ -31,6 +31,26 @@ registerBlockType("gutenberg-slideshow-block/slideshow", {
       type: "boolean",
       default: true,
     },
+
+    arrowButton: {
+      type: "boolean",
+      default: true,
+    },
+
+    isTitleShow: {
+      type: "boolean",
+      default: true,
+    },
+
+    isDescShow: {
+      type: "boolean",
+      default: true,
+    },
+
+    isDateShow: {
+      type: "boolean",
+      default: true,
+    },
   },
 
   edit,

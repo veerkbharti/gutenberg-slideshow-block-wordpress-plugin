@@ -8,15 +8,58 @@ import {
 import { useState, useEffect } from "@wordpress/element";
 
 const edit = ({ attributes, setAttributes }) => {
-  const { API_URL, posts, title, autoPlay, infiniteLoop } = attributes;
+  const {
+    API_URL,
+    posts,
+    title,
+    autoPlay,
+    infiniteLoop,
+    arrowButton,
+    isTitleShow,
+    isDescShow,
+    isDateShow,
+  } = attributes;
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+
+  const getMonthAbbreviation = (monthIndex) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    return months[monthIndex];
+  };
 
   const fetchData = async () => {
     try {
       const response = await fetch(API_URL);
       const data = await response.json();
-      setAttributes({ posts: data });
+      const newData = data.map((item) => {
+        const originalDate = new Date(item.date);
+        const formattedDate = `${originalDate.getDate()} ${getMonthAbbreviation(
+          originalDate.getMonth()
+        )} ${originalDate.getFullYear()}`;
+        return {
+          id: item.id,
+          title: item.title.rendered,
+          desc: item.excerpt.rendered,
+          date: formattedDate,
+          link: item.link,
+          img_url: item.jetpack_featured_media_url,
+        };
+      });
+
+      setAttributes({ posts: newData });
       setIsLoading(false);
       setIsError(false);
     } catch (error) {
@@ -65,6 +108,42 @@ const edit = ({ attributes, setAttributes }) => {
               />
               <label className="label">Infinite loop</label>
             </div>
+
+            <div className="toggle-box">
+              <FormToggle
+                checked={arrowButton}
+                onChange={() => setAttributes({ arrowButton: !arrowButton })}
+              />
+              <label className="label">Arrow Button</label>
+            </div>
+          </div>
+        </PanelBody>
+
+        <PanelBody title="Toggle Metadata" initialOpen={false}>
+          <div className="toggle-body">
+            <div className="toggle-box">
+              <FormToggle
+                checked={isTitleShow}
+                onChange={() => setAttributes({ isTitleShow: !isTitleShow })}
+              />
+              <label className="label">Post Title</label>
+            </div>
+
+            <div className="toggle-box">
+              <FormToggle
+                checked={isDescShow}
+                onChange={() => setAttributes({ isDescShow: !isDescShow })}
+              />
+              <label className="label">Post Description</label>
+            </div>
+
+            <div className="toggle-box">
+              <FormToggle
+                checked={isDateShow}
+                onChange={() => setAttributes({ isDateShow: !isDateShow })}
+              />
+              <label className="label">Post Date</label>
+            </div>
           </div>
         </PanelBody>
       </InspectorControls>
@@ -92,32 +171,53 @@ const edit = ({ attributes, setAttributes }) => {
                 <a href={post.link}>
                   <img
                     className="post-thumb"
-                    src={post.jetpack_featured_media_url}
-                    alt={post.title.rendered}
+                    src={post.img_url}
+                    alt={post.title}
                   />
                 </a>
                 <div className="post-content">
-                  <a href={post.link}>
-                    <h4 className="post-title">{post.title.rendered}</h4>
-                  </a>
-                  <div className="post-desc">
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: post.excerpt.rendered,
-                      }}
-                    />
-                  </div>
-                  <label className="post-date">{post.date}</label>
+                  {isTitleShow ? (
+                    <a href={post.link}>
+                      <h4 className="post-title">{post.title}</h4>
+                    </a>
+                  ) : (
+                    ""
+                  )}
+
+                  {isDescShow ? (
+                    <div className="post-desc">
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: post.desc,
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {isDateShow ? (
+                    <label className="post-date">{post.date}</label>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </li>
             ))}
           </ul>
-          <button type="button" id="prev-button" className="prev-icon">
-            <span className="dashicons dashicons-arrow-left-alt2"></span>
-          </button>
-          <button type="button" id="next-button" className="next-icon">
-            <span className="dashicons dashicons-arrow-right-alt2"></span>
-          </button>
+
+          {arrowButton ? (
+            <>
+              <button type="button" id="prev-button" className="prev-icon">
+                <span className="dashicons dashicons-arrow-left-alt2"></span>
+              </button>
+              <button type="button" id="next-button" className="next-icon">
+                <span className="dashicons dashicons-arrow-right-alt2"></span>
+              </button>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>
