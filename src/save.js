@@ -12,7 +12,7 @@ const save = ({ attributes }) => {
   return (
     <div
       className="slide-container"
-      style={{ margin: "0!important", maxWidth: "none" }}
+      style={{ margin: "0!important", maxWidth: "-webkit-fill-available" }}
     >
       <ul
         className="slider"
@@ -24,37 +24,33 @@ const save = ({ attributes }) => {
             <a href={post.link}>
               <img className="post-thumb" src={post.img_url} alt={post.title} />
             </a>
-            <div className="post-content">
-              {isTitleShow ? (
-                <a href={post.link}>
-                  <h4 className="post-title">{post.title}</h4>
-                </a>
-              ) : (
-                ""
-              )}
+            {isTitleShow || isDescShow || isDateShow ? (
+              <div className="post-content">
+                {isTitleShow && (
+                  <a href={post.link}>
+                    <h4 className="post-title">{post.title}</h4>
+                  </a>
+                )}
 
-              {isDescShow ? (
-                <div className="post-desc">
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.desc,
-                    }}
-                  />
-                </div>
-              ) : (
-                ""
-              )}
+                {isDescShow && (
+                  <div className="post-desc">
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: post.desc,
+                      }}
+                    />
+                  </div>
+                )}
 
-              {isDateShow ? (
-                <label className="post-date">{post.date}</label>
-              ) : (
-                ""
-              )}
-            </div>
+                {isDateShow && <label className="post-date">{post.date}</label>}
+              </div>
+            ) : (
+              ""
+            )}
           </li>
         ))}
       </ul>
-      {arrowButton ? (
+      {arrowButton && (
         <>
           <button type="button" id="prev-button" className="prev-icon">
             <span className="dashicons dashicons-arrow-left-alt2"></span>
@@ -63,8 +59,6 @@ const save = ({ attributes }) => {
             <span className="dashicons dashicons-arrow-right-alt2"></span>
           </button>
         </>
-      ) : (
-        ""
       )}
     </div>
   );
